@@ -15,11 +15,13 @@ const resolvers = {
     },
   
     Mutation: {
+        //Creating a user & sign a token
       addUser: async (parent, { username, email, password }) => {
         const user = await User.create({ username, email, password });
         const token = signToken(user);
         return { token, user };
       },
+      //Login a user & sign a token
       login: async (parent, { email, password }) => {
         const user = await User.findOne({ email });
   
@@ -37,6 +39,7 @@ const resolvers = {
   
         return { token, user };
       },
+      //Save a book to a user's 'savedBooks' field by adding it to the set - preventing duplicates
       saveBook: async (parent, { savedBooks }, context) => {
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate({
@@ -49,11 +52,12 @@ const resolvers = {
         throw AuthenticationError;
         ('You need to be logged in!');
       },
+      //remove a book from 'savedBooks' 
       deleteBook: async (parent, { bookId }, context) => {
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate({
             _id: context.user._id},
-            { $pull: { savedBooks: bookId._id } },
+            { $pull: { savedBooks: bookId.bookId } },
             { new: true });
   
           return updatedUser;
