@@ -13,7 +13,7 @@ const typeDefs = `#graphql
   }
 
   type Book {
-    bookId: ID!
+    bookId: String!
     authors: [String]
     description: String!
     title: String!
@@ -40,7 +40,7 @@ const typeDefs = `#graphql
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     saveBook(bookData: SaveBookInfo!): User
-    deleteBook(bookId: ID!): User
+    deleteBook(bookId: String!): User
   }
 `;
 
