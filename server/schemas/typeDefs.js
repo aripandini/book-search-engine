@@ -4,7 +4,7 @@ const typeDefs = `#graphql
   }
   
   type User {
-    __id: ID!
+    _id: ID!
     username: String!
     email: String!
     password: String!
@@ -27,7 +27,7 @@ const typeDefs = `#graphql
   }
 
  # input type grouping sets of arguments together to be used as an argument to another field
-  input saveBookInfo {
+  input SaveBookInfo {
     authors: [String]
     description: String!
     bookId: String!
@@ -39,7 +39,7 @@ const typeDefs = `#graphql
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    saveBook(bookData: saveBookInfo!): User
+    saveBook(bookData: SaveBookInfo!): User
     deleteBook(bookId: ID!): User
   }
 `;
