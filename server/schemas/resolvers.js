@@ -7,8 +7,10 @@ const resolvers = {
     Query: {
         //retrieving the logged in user without specifically searching for them
       me: async (parent, args, context) => {
+        console.log(context.user)
         if (context.user) {
-          return User.findOne({ _id: context.user._id })
+          const user = await User.findOne({ _id: context.user._id });
+          return user;
         }
         throw AuthenticationError;
       },
@@ -41,28 +43,35 @@ const resolvers = {
       },
       //Save a book to a user's 'savedBooks' field by adding it to the set - preventing duplicates
       saveBook: async (parent, { bookData }, context) => {
+        console.log("context>>>", context.user)
         if (context.user) {
-          const updatedUser = await User.findOneAndUpdate({
-            _id: context.user._id},
-            { $addToSet: { savedBooks: bookData } },
-            { new: true, runValidators: true });
-  
-          return updatedUser;
+          try {
+            const updatedUser = await User.findOneAndUpdate({
+              _id: context.user._id},
+              { $addToSet: { savedBooks: bookData } },
+              { new: true, runValidators: true });
+    
+            return updatedUser;
+          } catch (err) {
+            console.log(err);
+          }
         }
-        throw AuthenticationError;
-        ('You need to be logged in!');
       },
       //remove a book from 'savedBooks' 
       deleteBook: async (parent, { bookId }, context) => {
+        console.log(">>>>contextDelete", context)
         if (context.user) {
-          const updatedUser = await User.findOneAndUpdate({
-            _id: context.user._id},
-            { $pull: { savedBooks: bookId.bookId } },
-            { new: true });
-  
-          return updatedUser;
+          try {
+            const updatedUser = await User.findOneAndUpdate({
+              _id: context.user._id},
+              { $pull: { savedBooks:{ bookId: bookId } } },
+              { new: true });
+    
+            return updatedUser;
+          } catch (err) {
+            console.log(err);
+          }
         }
-        throw AuthenticationError;
       },
     },
   };
