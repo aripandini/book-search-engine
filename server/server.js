@@ -11,9 +11,10 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: ({ req }) => {
-  //   return authMiddleware({ req });
-  // },
+  context: ({ req }) => {
+    console.log(red)
+    return authMiddleware({ req });
+  },
 });
 
 const app = express();

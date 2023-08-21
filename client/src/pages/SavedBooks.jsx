@@ -24,12 +24,12 @@ const SavedBooks = () => {
     ]
   });
 
-  const { loading, data } = useQuery(GET_ME, {
-    fetchPolicy: "network-only"
-  });
+  const { loading, data } = useQuery(GET_ME,
+     {fetchPolicy: "no-cache" }
+     );
   const userData = data?.me || []
 
-  console.log(data);
+  console.log(">>>>>", data);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {

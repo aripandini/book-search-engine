@@ -89,6 +89,8 @@ const SearchBooks = () => {
     } catch (err) {
       console.error(err);
     }
+    console.log("savedBooksIds", savedBookIds)
+    console.log("bookToSave", bookToSave)
   };
 
   return (
