@@ -40,11 +40,11 @@ const resolvers = {
         return { token, user };
       },
       //Save a book to a user's 'savedBooks' field by adding it to the set - preventing duplicates
-      saveBook: async (parent, { savedBooks }, context) => {
+      saveBook: async (parent, { bookData }, context) => {
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate({
             _id: context.user._id},
-            { $addToSet: { savedBooks: savedBooks } },
+            { $addToSet: { savedBooks: bookData } },
             { new: true, runValidators: true });
   
           return updatedUser;
