@@ -4,6 +4,8 @@ A fully functioning Google Books API search engine that allows users to save the
 
 ## Application 
 
-[Book Search Engine]([https://link/](https://another-booksearch-app-1e162975503f.herokuapp.com/)https://another-booksearch-app-1e162975503f.herokuapp.com/)
+[Book Search Engine](https://another-booksearch-app-1e162975503f.herokuapp.com/)
+
+![Book Search Engine](./screenshot/booksearch.png)
 
 
